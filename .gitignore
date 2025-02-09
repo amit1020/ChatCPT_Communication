@@ -169,3 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# pip cache
+pip-cache/
+# Poetry cache
+.poetry/
+#vscode
+.vscode/
