@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from openai import *
-from helper_general_function import read_ini_file
 import os 
 
 
@@ -15,17 +14,20 @@ class ChatGPT_methods:
     def __init__(self):
               
         self.client = OpenAI(
-            api_key= "Enter your API key here"
+            #!Delete before pushing to the repository
+            api_key= ""#Enter you API key here or read from ini/env file
         )
         self._module = "gpt-4o-mini"
         self.message = None
         
         
-        
+
+    
         
     def get_response(func):
         def wrapper(self,*args,**kwargs):
             func(self,*args,**kwargs)
+            print(self.message)
             try:
                 completion = self.client.chat.completions.create(
                     model=self._module,
@@ -42,19 +44,30 @@ class ChatGPT_methods:
     #Update the topic
     @get_response
     def generate_post(self):
-        self.message = f"Write a Linkedin post about {self._change_topic()} without adding your comments"
+        answer =  input("Do you want to take a topic from file? (Y/N):")
+        if answer.lower() == "y":
+            self.message = f"Write a Linkedin post about {self._change_topic()} without adding your comments"
+            
+        elif answer.lower() == "n":
+            
+            self.message = input("Enter query:")
+            
         
-
+        else:
+            return "Invalid input"
+   
+   
+   
+    
+   
    
     
     @staticmethod
-    def _change_topic(self):
+    def _change_topic():
         try:
-            if not os.path.exists("topics.txt"):
+            if not os.path.exists("Topics_list.txt"):
                 return None#TODO - topic.txt will be updated with the user's input
-
-
-            with open("Code/topics.txt","r+") as file:   
+            with open("Topics_list.txt","r+") as file:   
                 file.seek(0)# Ensure that the pointer is at the beginning of the file
                 lines = file.readlines()
                 if not lines:
@@ -68,4 +81,9 @@ class ChatGPT_methods:
         except Exception as e:
             return None
         
+    
         
+        
+        
+chat = ChatGPT_methods()
+print(chat.generate_post())
