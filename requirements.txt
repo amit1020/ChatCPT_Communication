@@ -1,2 +1,2 @@
-configparser == 3.5.0
-openai >= 0.10.0
+configparser == 3.5.0 #for INI file parsing
+openai >= 0.10.0 #for GPT-3 API

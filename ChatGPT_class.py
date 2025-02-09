@@ -41,24 +41,28 @@ class ChatGPT_methods:
                 return None
         return wrapper
         
-    #Update the topic
-    @get_response
-    def generate_post(self):
-        answer =  input("Do you want to take a topic from file? (Y/N):")
-        if answer.lower() == "y":
-            self.message = f"Write a Linkedin post about {self._change_topic()} without adding your comments"
-            
-        elif answer.lower() == "n":
-            
-            self.message = input("Enter query:")
-            
-        
-        else:
-            return "Invalid input"
+
    
-   
-   
-    
+    def Refill_topic(self):
+        try:
+            with open("Topics_list.txt","r+") as file:   
+                file.seek(0)# Ensure that the pointer is at the beginning of the file
+                lines = file.readlines()
+                if lines:
+                    return None
+                
+                self.message = ""#!Enter generral suject here
+                #new_topics  = self.wrapper(func,)
+                
+                
+                currect_topic = lines[0].strip()#Remove the '\n' from the string and save the topic into the variable
+                file.seek(0)#Return the pointer to the beginning of the file
+                file.truncate()#Clear the file
+                # Write all the topics again except the first one
+                file.writelines(lines[1:])    
+            return currect_topic
+        except Exception as e:
+            return
    
    
     
@@ -85,5 +89,3 @@ class ChatGPT_methods:
         
         
         
-chat = ChatGPT_methods()
-print(chat.generate_post())
