@@ -15,7 +15,7 @@ class ChatGPT_methods:
               
         self.client = OpenAI(
             #!Delete before pushing to the repository
-            api_key= "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"#Enter you API key here or read from ini/env file
+            api_key= ""#Enter you API key here or read from ini/env file
         )
         self._module = "gpt-4o-mini"
         self.message = None
@@ -56,6 +56,11 @@ class ChatGPT_methods:
         else:
             return "Invalid input"
    
+   
+   
+    
+   
+   
     
     @staticmethod
     def _change_topic():
@@ -76,7 +81,7 @@ class ChatGPT_methods:
         except Exception as e:
             return None
         
-        
+    
         
         
         

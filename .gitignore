@@ -176,3 +176,7 @@ pip-cache/
 .poetry/
 #vscode
 .vscode/
+# Jupyter Notebook
+.ipynb_checkpoints
+#not_upload to github
+not_upload.txt
