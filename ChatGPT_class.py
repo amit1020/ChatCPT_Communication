@@ -15,7 +15,7 @@ class ChatGPT_methods:
               
         self.client = OpenAI(
             #!Delete before pushing to the repository
-            api_key= ""#Enter you API key here or read from ini/env file
+            api_key= "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"#Enter you API key here or read from ini/env file
         )
         self._module = "gpt-4o-mini"
         self.message = None
@@ -27,6 +27,7 @@ class ChatGPT_methods:
     def get_response(func):
         def wrapper(self,*args,**kwargs):
             func(self,*args,**kwargs)
+            print(self.message)
             try:
                 completion = self.client.chat.completions.create(
                     model=self._module,
@@ -57,11 +58,11 @@ class ChatGPT_methods:
    
     
     @staticmethod
-    def _change_topic(self):
+    def _change_topic():
         try:
-            if not os.path.exists("topics.txt"):
+            if not os.path.exists("Topics_list.txt"):
                 return None#TODO - topic.txt will be updated with the user's input
-            with open("Code/topics.txt","r+") as file:   
+            with open("Topics_list.txt","r+") as file:   
                 file.seek(0)# Ensure that the pointer is at the beginning of the file
                 lines = file.readlines()
                 if not lines:
